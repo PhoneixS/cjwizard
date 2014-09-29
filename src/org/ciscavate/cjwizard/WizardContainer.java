@@ -22,6 +22,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -30,8 +31,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ciscavate.cjwizard.pagetemplates.DefaultPageTemplate;
 import org.ciscavate.cjwizard.pagetemplates.PageTemplate;
 import org.ciscavate.utilities.ExceptionUtilities;
@@ -48,7 +47,7 @@ public class WizardContainer extends JPanel implements WizardController {
    /**
     * Commons logging log instance
     */
-   private static Log log = LogFactory.getLog(WizardContainer.class);
+   private static Logger log = Logger.getLogger(WizardContainer.class.getName());
 
    /**
     * Resource to translate GUI elements.
@@ -277,7 +276,7 @@ public class WizardContainer extends JPanel implements WizardController {
     * The PageFactory is not queried for pages when moving *backwards*.
     */
    public void prev() {
-      log.debug("prev. page");
+      log.fine("prev. page");
 
       // store visited pages
       WizardPage removing = _path.remove(_path.size() - 1);
@@ -319,7 +318,7 @@ public class WizardContainer extends JPanel implements WizardController {
     * Called when the page must advance to the next page.
     */
    public void next() {
-      log.debug("next page");
+      log.fine("next page");
 
       WizardPage lastPage = currentPage();
       if (null != lastPage) {
@@ -506,7 +505,7 @@ public class WizardContainer extends JPanel implements WizardController {
     * 
     */
    public void finish() {
-      log.debug("finish");
+      log.fine("finish");
 
       WizardPage lastPage = currentPage();
 
@@ -532,7 +531,7 @@ public class WizardContainer extends JPanel implements WizardController {
     * 
     */
    public void cancel() {
-      log.debug("cancel");
+      log.fine("cancel");
 
       for (WizardListener l : _listeners) {
          l.onCanceled(getPath(), getSettings());

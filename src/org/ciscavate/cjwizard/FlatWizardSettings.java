@@ -21,9 +21,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * This settings can save pairs of key and values in a plain {@link HashMap}.
@@ -46,7 +46,7 @@ implements WizardSettings
    /**
     * Commons logging log instance
     */
-   private static Log log = LogFactory.getLog(FlatWizardSettings.class);
+   private static Logger log = Logger.getLogger(FlatWizardSettings.class.getName());
    
    /* (non-Javadoc)
     * @see org.ciscavate.cjwizard.WizardSettings#newPage(java.lang.String)
@@ -91,20 +91,20 @@ implements WizardSettings
          out = new ObjectOutputStream(fout);
          out.writeObject(this);
       } catch (IOException ioe) {
-         log.error("Error writing settings", ioe);
+         log.log(Level.SEVERE, "Error writing settings", ioe);
       } finally {
          if (null != out) {
             try {
                out.close();
             } catch (IOException ioe) {
-               log.error("Error closing output stream", ioe);
+               log.log(Level.SEVERE, "Error closing output stream", ioe);
             }
          }
          if (null != fout) {
             try {
                fout.close();
             } catch (IOException ioe) {
-               log.error("Error closing file", ioe);
+               log.log(Level.SEVERE, "Error closing file", ioe);
             }
          }
       }
@@ -125,22 +125,22 @@ implements WizardSettings
          in = new ObjectInputStream(fin);
          return (FlatWizardSettings)in.readObject();
       } catch (IOException ioe) {
-         log.error("Error reading settings", ioe);
+         log.log(Level.SEVERE, "Error reading settings", ioe);
       } catch (ClassNotFoundException cnfe) {
-         log.error("Couldn't instantiate seralized class", cnfe);
+         log.log(Level.SEVERE, "Couldn't instantiate seralized class", cnfe);
       } finally {
          if (null != in) {
             try {
                in.close();
             } catch (IOException ioe) {
-               log.error("Error closing inputstream", ioe);
+               log.log(Level.SEVERE, "Error closing inputstream", ioe);
             }
          }
          if (null != fin) {
             try {
                fin.close();
             } catch (IOException ioe) {
-               log.error("Error closing file", ioe);
+               log.log(Level.SEVERE, "Error closing file", ioe);
             }
          }
       }

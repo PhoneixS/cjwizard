@@ -24,8 +24,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.ciscavate.cjwizard.pagetemplates.TitledPageTemplate;
 
 /**
@@ -40,7 +39,7 @@ public class WizardTest extends JDialog {
    /**
     * Commons logging log instance
     */
-   private static Log log = LogFactory.getLog(WizardTest.class);
+   private static Logger log = Logger.getLogger(WizardTest.class.getName());
    
    /**
     * @param args
@@ -64,19 +63,19 @@ public class WizardTest extends JDialog {
       wc.addWizardListener(new WizardListener(){
          @Override
          public void onCanceled(List<WizardPage> path, WizardSettings settings) {
-            log.debug("settings: "+wc.getSettings());
+            log.fine("settings: "+wc.getSettings());
             WizardTest.this.dispose();
          }
 
          @Override
          public void onFinished(List<WizardPage> path, WizardSettings settings) {
-            log.debug("settings: "+wc.getSettings());
+            log.fine("settings: "+wc.getSettings());
             WizardTest.this.dispose();
          }
 
          @Override
          public void onPageChanged(WizardPage newPage, List<WizardPage> path) {
-            log.debug("settings: "+wc.getSettings());
+            log.fine("settings: "+wc.getSettings());
             // Set the dialog title to match the description of the new page:
             WizardTest.this.setTitle(newPage.getDescription());
          }
@@ -165,7 +164,7 @@ public class WizardTest extends JDialog {
       @Override
       public WizardPage createPage(List<WizardPage> path,
             WizardSettings settings) {
-         log.debug("creating page "+path.size());
+         log.fine("creating page "+path.size());
          
          // Get the next page to display.  The path is the list of all wizard
          // pages that the user has proceeded through from the start of the
@@ -179,7 +178,7 @@ public class WizardTest extends JDialog {
          // In fact, we can do arbitrarily complex computation to determine
          // the next wizard page.
          
-         log.debug("Returning page: "+page);
+         log.fine("Returning page: "+page);
          return page;
       }
       

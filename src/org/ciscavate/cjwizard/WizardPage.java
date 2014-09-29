@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComboBox;
@@ -31,8 +32,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.text.JTextComponent;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * 
@@ -46,7 +45,7 @@ public abstract class WizardPage extends JPanel {
    /**
     * Commons logging log instance
     */
-   private static Log log = LogFactory.getLog(WizardPage.class);
+   private static Logger log = Logger.getLogger(WizardPage.class.getName());
    
    /**
     * Count of WizardPages, used to get unique IDs
@@ -160,7 +159,7 @@ public abstract class WizardPage extends JPanel {
       } else if (c instanceof JList){
          val = ((JList) c).getSelectedValues();
       } else {
-         log.warn("Unknown component: "+c);
+         log.warning("Unknown component: "+c);
       }
       
       return val;
@@ -202,7 +201,7 @@ public abstract class WizardPage extends JPanel {
          }
          list.setSelectedIndices(indices);
       } else {
-         log.warn("Unknown component: "+c);
+         log.warning("Unknown component: "+c);
       }
       
    }
@@ -288,7 +287,7 @@ public abstract class WizardPage extends JPanel {
        */
       @Override
       public void componentAdded(ContainerEvent e) {
-         log.trace("component added: "+e.getChild());
+         log.finer("component added: "+e.getChild());
          Component newComp = e.getChild();
          
          storeIfNamed(newComp);
@@ -324,7 +323,7 @@ public abstract class WizardPage extends JPanel {
        */
       @Override
       public void componentRemoved(ContainerEvent e) {
-         log.trace("component removed: "+e.getChild());
+         log.finer("component removed: "+e.getChild());
          _namedComponents.remove(e.getChild());
       }
    }

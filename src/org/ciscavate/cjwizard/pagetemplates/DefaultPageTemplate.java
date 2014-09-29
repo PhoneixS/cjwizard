@@ -16,11 +16,11 @@
 package org.ciscavate.cjwizard.pagetemplates;
 
 import java.awt.CardLayout;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ciscavate.cjwizard.WizardContainer;
 import org.ciscavate.cjwizard.WizardPage;
+import org.ciscavate.cjwizard.WizardTest;
 
 /**
  * This class provides a point at which third-party code can
@@ -37,7 +37,7 @@ public class DefaultPageTemplate extends PageTemplate {
    /**
     * Commons logging log instance
     */
-   private static Log log = LogFactory.getLog(WizardContainer.class);
+   private static Logger log = Logger.getLogger(DefaultPageTemplate.class.getName());
    
    private final CardLayout _layout = new CardLayout();
    
@@ -49,7 +49,7 @@ public class DefaultPageTemplate extends PageTemplate {
     * @see org.ciscavate.cjwizard.PageTemplate#setPage(org.ciscavate.cjwizard.WizardPage)
     */
    public void setPage(final WizardPage page){
-      log.debug("Setting page: "+page);
+      log.fine("Setting page: "+page);
 
       // remove the page, just in case it was added before:
       remove(page);
